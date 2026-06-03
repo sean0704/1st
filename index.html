@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ryan 生日快樂！ 爽爽抽一番賞</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Ryan 生日快樂！</title>
     <style>
         /* 基礎設定與一番賞熱血風格背景 */
         body {
@@ -72,7 +73,7 @@
         /* 獎品配率表 */
         .board-container {
             width: 90%;
-            max-width: 800px;
+            max-width: 700px;
             background: #fff;
             border: 4px solid #2c3e50;
             border-radius: 15px;
@@ -221,14 +222,6 @@
             pointer-events: auto;
         }
 
-        .overlay-title {
-            color: #fff;
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 30px;
-            text-shadow: 0 2px 10px rgba(255,255,255,0.5);
-        }
-
         /* 實體籤紙設計 */
         .tickets-container {
             display: flex;
@@ -355,10 +348,8 @@
     </style>
 </head>
 <body>
-
-    <h1>Ryan 生日快樂！ 爽爽抽一番賞</h1>
-    <div class="subtitle">自己的禮物 自己抽 我的刀盾 比比拉布</div>
-
+    <h1>Ryan 生日快樂！</h1>
+    <div class="subtitle">生日禮物 🎁 一番賞 爽爽抽</div>
     <div class="status-header">
         <span>全套 <span id="total-box-count">0</span> 抽</span>
         <span>剩餘：<span class="highlight-number" id="tickets-left">0</span> 張</span>
@@ -366,13 +357,16 @@
 
     <div class="controls">
         <button id="draw-1-btn">抽 1 次</button>
-        <button id="reset-btn">換新的一箱</button>
     </div>
 
     <div class="board-container">
         <div class="board-title">📋 獎品配率表 (即時更新)</div>
         <div class="prizes-grid" id="board-grid">
             </div>
+    </div>
+
+    <div class="controls">
+        <button id="reset-btn">換新的一箱</button>
     </div>
 
     <div class="board-container" style="background: transparent; border: none; box-shadow: none;">
@@ -382,7 +376,6 @@
     </div>
 
     <div class="overlay" id="overlay">
-        <div class="overlay-title">手氣如何？自己撕開看看！</div>
         <div class="tickets-container" id="tickets-container">
             </div>
         <button id="close-overlay-btn">確認獎項並返回</button>
@@ -391,19 +384,19 @@
     <script>
         // 定義一番賞的獎池設定 (總計 10 抽)
         const prizeConfig = [
-            { id: 'S', name: 'S賞 荒野亂鬥高級通行券', total: 1, color: '#ff00ff' },
-            { id: 'A', name: 'A賞 R幣1000', total: 1, color: '#e74c3c' },
-            { id: 'B', name: 'B賞 現金300', total: 1, color: '#e67e22' },
-            { id: 'C', name: 'C賞 點數200', total: 1, color: '#f1c40f' },
-            { id: 'D', name: 'D賞 電動時間3小時', total: 1, color: '#2ecc71' },
-            { id: 'E', name: 'E賞 媽媽親一下', total: 1, color: '#3498db' },
-            { id: 'F', name: 'F賞 每個人巴結哥哥講好話', total: 1, color: '#9b59b6' },
+            { id: 'S', name: '荒野亂鬥高級通行券', total: 1, color: '#ff00ff' },
+            { id: 'A', name: '現金1000', total: 1, color: '#e74c3c' },
+            { id: 'B', name: 'R幣1000', total: 1, color: '#e67e22' },
+            { id: 'C', name: '點數200', total: 1, color: '#f1c40f' },
+            { id: 'D', name: '電動時間5小時', total: 1, color: '#2ecc71' },
+            { id: 'E', name: '媽媽親一下', total: 1, color: '#3498db' },
+            { id: 'F', name: '每個人巴結哥哥講好話', total: 1, color: '#9b59b6' },
             { 
                 id: 'G', 
                 names: [
-                    'G賞 爸爸抱一個', 
-                    'G賞 媽媽抱一個', 
-                    'G賞 弟弟抱一個'
+                    '爸爸抱一個', 
+                    '媽媽抱一個', 
+                    '弟弟抱一個'
                 ], 
                 total: 3, 
                 color: '#95a5a6' 
@@ -574,9 +567,101 @@
 
                 if (prize.id === 'S') {
                     setTimeout(() => {
-                        alert(`🔥 天選之人！\n恭喜抽中全場唯一：【${prize.name}】！`);
+                        //alert(`🔥 天選之人！\n恭喜抽中全場唯一：【${prize.name}】！`);
+                        /*
+                        Swal.fire({
+                            title: '🔥 天選之人！',
+                            text: '恭喜抽中全場唯一大獎！',
+                            imageUrl: 'https://unsplash.it/400/200', // 替換成你的圖片網址
+                            imageWidth: 400,
+                            imageHeight: 200,
+                            imageAlt: '大獎圖片',
+                            confirmButtonText: '太棒了！',
+                            confirmButtonColor: '#ff4757'
+                        });
+                        */
+                        //音效
+                        const audio = new Audio('s.mp3');
+                        audio.volume = 0.5;
+                        audio.play().catch(error => console.log(error));
+                        //影片
+                        Swal.fire({
+                            title: '恭喜抽中！荒野亂鬥高級通行券！ ',
+                            html: `
+                                <p>S賞</p>
+                                <video width="100%" autoplay muted playsinline style="border-radius:8px;">
+                                    <source src="s.mp4" type="video/mp4">
+                                </video>
+                            `,
+                            confirmButtonText: '開心收下',
+                            confirmButtonColor: '#ff4757'
+                        });
                     }, 500);
                 }
+
+                if (prize.id === 'A') {
+                    setTimeout(() => {
+                        //音效
+                        const audio = new Audio('a.mp3');
+                        audio.volume = 0.5;
+                        audio.play().catch(error => console.log(error));
+                        //影片
+                        Swal.fire({
+                            title: '恭喜抽中！現金1000！ ',
+                            html: `
+                                <p>A賞</p>
+                                <video width="100%" autoplay muted playsinline style="border-radius:8px;">
+                                    <source src="a.mp4" type="video/mp4">
+                                </video>
+                            `,
+                            confirmButtonText: '開心收下',
+                            confirmButtonColor: '#ff4757'
+                        });
+                    }, 500);
+                }
+
+                if (prize.id === 'B') {
+                    setTimeout(() => {
+                        //音效
+                        const audio = new Audio('b.mp3');
+                        audio.volume = 0.5;
+                        audio.play().catch(error => console.log(error));
+                        //影片
+                        Swal.fire({
+                            title: '恭喜抽中！R幣1000！ ',
+                            html: `
+                                <p>B賞</p>
+                                <video width="100%" autoplay muted playsinline style="border-radius:8px;">
+                                    <source src="b.mp4" type="video/mp4">
+                                </video>
+                            `,
+                            confirmButtonText: '開心收下',
+                            confirmButtonColor: '#ff4757'
+                        });
+                    }, 500);
+                }
+
+                if (prize.id === 'C') {
+                    setTimeout(() => {
+                        //音效
+                        const audio = new Audio('c.mp3');
+                        audio.volume = 0.5;
+                        audio.play().catch(error => console.log(error));
+                        //影片
+                        Swal.fire({
+                            title: '恭喜抽中！點數200！ ',
+                            html: `
+                                <p>C賞</p>
+                                <video width="100%" autoplay muted playsinline style="border-radius:8px;">
+                                    <source src="c.mp4" type="video/mp4">
+                                </video>
+                            `,
+                            confirmButtonText: '開心收下',
+                            confirmButtonColor: '#ff4757'
+                        });
+                    }, 500);
+                }
+
 
                 if (unpeeledCount === 0) {
                     closeOverlayBtn.style.display = 'block';
