@@ -313,9 +313,10 @@
             color: #2c3e50;
             border-color: #f39c12;
             box-shadow: 0 6px 0 #f39c12;
-            display: none; /* 籤全撕完才顯示 */
+            visibility: hidden; /* 籤全撕完才顯示 */
         }
         #close-overlay-btn:active:not(:disabled) { box-shadow: 0 0 0 #f39c12; }
+        #close-overlay-btn[style*="visible"] { visibility: visible; }
 
         /* 戰利品區 */
         .inventory-list {
@@ -519,7 +520,7 @@
         function drawTickets(times) {
             ticketsContainer.innerHTML = '';
             unpeeledCount = times;
-            closeOverlayBtn.style.display = 'none';
+            closeOverlayBtn.style.visibility = 'hidden';
             overlay.classList.add('active');
 
             for (let i = 0; i < times; i++) {
@@ -664,7 +665,7 @@
 
 
                 if (unpeeledCount === 0) {
-                    closeOverlayBtn.style.display = 'block';
+                    closeOverlayBtn.style.visibility = 'visible';
                 }
             });
 
